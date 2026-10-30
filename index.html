@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Pilah Sampah: Pahlawan Kebersihan Kota — Game Edukasi Pemilahan Sampah</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Fredoka:wght@600;700&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    body, html {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: #0d1317;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    #game-container {
+      width: 100vw;
+      height: 100vh;
+      max-width: 177.78vh; /* 16:9 aspect ratio */
+      max-height: 56.25vw;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+      position: relative;
+      background: #0d1317 url('/assets/backgrounds/bg_cover_splash.png') center/cover no-repeat;
+    }
+    canvas {
+      display: block;
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    /* Mobile Landscape Orientation Overlay */
+    #orientation-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(9, 16, 29, 0.97);
+      backdrop-filter: blur(8px);
+      z-index: 9999999;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 30px;
+      color: #FFFFFF;
+      box-sizing: border-box;
+    }
+
+    .rotate-device-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid #38bdf8;
+      color: #38bdf8;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      letter-spacing: 0.5px;
+    }
+
+    .phone-anim-box {
+      width: 90px;
+      height: 90px;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .phone-icon-svg {
+      width: 64px;
+      height: 64px;
+      animation: rotatePhone 2.2s infinite ease-in-out;
+      transform-origin: center;
+      filter: drop-shadow(0 4px 14px rgba(56, 189, 248, 0.4));
+    }
+
+    @keyframes rotatePhone {
+      0%, 20% { transform: rotate(0deg); }
+      50%, 80% { transform: rotate(-90deg); }
+      100% { transform: rotate(-90deg); }
+    }
+
+    .orient-card h2 {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 26px;
+      color: #FFFFFF;
+      margin-bottom: 8px;
+      letter-spacing: 0.5px;
+    }
+
+    .orient-card h3 {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: #FBBF24;
+      margin-bottom: 16px;
+      letter-spacing: 1px;
+    }
+
+    .orient-card p {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14.5px;
+      color: #CBD5E1;
+      max-width: 380px;
+      line-height: 1.6;
+      margin: 0 auto;
+    }
+
+    @media screen and (orientation: portrait), screen and (max-aspect-ratio: 13/10) and (max-width: 960px) {
+      #orientation-overlay {
+        display: flex;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="game-container"></div>
+
+  <!-- Mobile Portrait Orientation Prompt -->
+  <div id="orientation-overlay">
+    <div class="orient-card">
+      <div class="rotate-device-badge">🔄 REKOMENDASI ORIENTASI</div>
+      <div class="phone-anim-box">
+        <svg class="phone-icon-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="12" y="4" width="24" height="40" rx="4" stroke="#38BDF8" stroke-width="3" fill="#0F172A"/>
+          <line x1="20" y1="8" x2="28" y2="8" stroke="#38BDF8" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="24" cy="38" r="2.5" fill="#38BDF8"/>
+        </svg>
+      </div>
+      <h2>PUTAR LAYAR KE LANDSCAPE</h2>
+      <h3>PILAH SAMPAH: PAHLAWAN KEBERSIHAN KOTA</h3>
+      <p>Game ini dirancang untuk tampilan mendatar (Landscape). Silakan putar orientasi HP Anda untuk pengalaman bermain yang optimal.</p>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
+
