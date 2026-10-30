@@ -153,13 +153,7 @@
     </div>
   </div>
 
-  <script type="module">
-    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-      import('/src/main.js');
-    } else {
-      import('./assets/game.bundle.js');
-    }
-  </script>
+  <script type="module" src="/src/main.js"></script>
 </body>
 </html>
 

@@ -47,7 +47,13 @@ const config = {
   ]
 };
 
-window.addEventListener('DOMContentLoaded', () => {
+const initGame = () => {
   new Phaser.Game(config);
-});
+};
+
+if (document.readyState === 'loading') {
+  window.addEventListener('DOMContentLoaded', initGame);
+} else {
+  initGame();
+}
 
