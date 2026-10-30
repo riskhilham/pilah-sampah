@@ -14,6 +14,20 @@ import { SummaryScene } from './scenes/SummaryScene.js';
 import { CatalogScene } from './scenes/CatalogScene.js';
 import { ShiftSelectScene } from './scenes/ShiftSelectScene.js';
 
+// Ensure crystal-clear text on High-DPI, Retina, and Fullscreen displays
+try {
+  const dpr = typeof window !== 'undefined' ? Math.max(2, Math.min(window.devicePixelRatio || 2, 3)) : 2;
+  const originalSetStyle = Phaser.GameObjects.TextStyle.prototype.setStyle;
+  Phaser.GameObjects.TextStyle.prototype.setStyle = function(style, updateText, setDefaults) {
+    if (style && style.resolution === undefined) {
+      style.resolution = dpr;
+    }
+    return originalSetStyle.call(this, style, updateText, setDefaults);
+  };
+} catch (e) {
+  console.warn('Text resolution enhancement fallback:', e);
+}
+
 const config = {
   type: Phaser.AUTO,
   width: GAME_CONFIG.WIDTH,
@@ -33,7 +47,10 @@ const config = {
   },
   render: {
     pixelArt: false,
-    antialias: true
+    antialias: true,
+    antialiasGL: true,
+    roundPixels: true,
+    powerPreference: 'high-performance'
   },
   scene: [
     BootScene,

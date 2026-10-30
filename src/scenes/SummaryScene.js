@@ -196,7 +196,11 @@ export class SummaryScene extends Phaser.Scene {
 
     this.createTabletButton(panelX, btnY, btnW, 'PETA LEVEL', 0x2563eb, () => {
       sounds.playClick();
-      this.scene.start('ShiftSelectScene');
+      this.scene.start('ShiftSelectScene', isWin ? {
+        justCompletedLevel: level,
+        stars: starsCount,
+        score: score
+      } : {});
     });
 
     this.createTabletButton(panelX + 220, btnY, btnW, 'MENU UTAMA', 0x334155, () => {

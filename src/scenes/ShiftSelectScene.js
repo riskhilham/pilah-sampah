@@ -25,6 +25,15 @@ export class ShiftSelectScene extends Phaser.Scene {
     super({ key: 'ShiftSelectScene' });
   }
 
+  init(data) {
+    if (data && data.justCompletedLevel) {
+      const lvl = parseInt(data.justCompletedLevel, 10);
+      const stars = Math.max(1, parseInt(data.stars, 10) || 1);
+      const score = Math.max(0, parseInt(data.score, 10) || 0);
+      Storage.saveShiftProgress(lvl, stars, score);
+    }
+  }
+
   create() {
     const w = GAME_CONFIG.WIDTH;
     const h = GAME_CONFIG.HEIGHT;
@@ -608,7 +617,7 @@ export class ShiftSelectScene extends Phaser.Scene {
     // Personal Records
     const recY = cardY + 112;
     const starsStr = '★'.repeat(progress.stars) + '☆'.repeat(3 - progress.stars);
-    const highestScore = (progress.score !== undefined ? progress.score : (progress.highScore || 0));
+    const highestScore = Number.isFinite(progress.score) ? progress.score : (Number.isFinite(progress.highScore) ? progress.highScore : 0);
     const recTxt = this.add.text(cardX, recY, `BINTANG DIRAIH: ${starsStr}   •   SKOR TERTINGGI: ${highestScore}`, {
       fontFamily: "'Chakra Petch', sans-serif",
       fontSize: '14px',

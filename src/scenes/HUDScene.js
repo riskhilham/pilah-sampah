@@ -95,14 +95,19 @@ export class HUDScene extends Phaser.Scene {
     sec1Bg.lineStyle(2, 0x1e293b, 1);
     sec1Bg.strokeRoundedRect(16, 22, 280, 68, 6);
 
-    this.levelText = this.add.text(28, 30, 'LEVEL 1: PERUMAHAN ASRI', {
+    const targetCount = (this.gameScene && this.gameScene.levelConfig && this.gameScene.levelConfig.targetWasteCount) || 16;
+    const initialTitle = (this.gameScene && this.gameScene.levelConfig) 
+      ? `LEVEL ${this.gameScene.levelConfig.level}: ${this.gameScene.levelConfig.name}`.toUpperCase()
+      : 'LEVEL 1: PERUMAHAN ASRI';
+
+    this.levelText = this.add.text(28, 30, initialTitle, {
       fontFamily: "'Fredoka', sans-serif",
       fontSize: '17px',
       fontStyle: 'bold',
       color: '#FFFFFF'
     });
 
-    this.quotaText = this.add.text(28, 58, 'TARGET SAMPAH: 0 / 18', {
+    this.quotaText = this.add.text(28, 58, `TARGET SAMPAH: 0 / ${targetCount}`, {
       fontFamily: "'Chakra Petch', monospace",
       fontSize: '14px',
       fontStyle: 'bold',
