@@ -16,8 +16,8 @@ export const LEVEL_CONFIGS = [
     spawnInterval: 2400, // ms
     activeCategories: [WASTE_CATEGORIES.ORGANIC, WASTE_CATEGORIES.RECYCLE],
     allowedHazardMisses: 3,
-    minPurityForWin: 0.80, // 80%
-    starThresholds: [0.80, 0.88, 0.95],
+    minPurityForWin: 0.65, // 65% (Edukasi Ramah Pemula)
+    starThresholds: [0.65, 0.80, 0.92],
     factsTip: 'Pemilahan dari rumah adalah langkah pertama menjaga bumi: 60% sampah perkotaan adalah sisa makanan dan kemasan!'
   },
   {
@@ -31,8 +31,8 @@ export const LEVEL_CONFIGS = [
     spawnInterval: 2100,
     activeCategories: [WASTE_CATEGORIES.ORGANIC, WASTE_CATEGORIES.RECYCLE],
     allowedHazardMisses: 3,
-    minPurityForWin: 0.82,
-    starThresholds: [0.82, 0.89, 0.96],
+    minPurityForWin: 0.70, // 70%
+    starThresholds: [0.70, 0.84, 0.94],
     factsTip: 'Bank Sampah Sekolah mendidik siswa menabung dari hasil daur ulang buku tulis bekas dan botol plastik bersih!'
   },
   {
@@ -46,8 +46,8 @@ export const LEVEL_CONFIGS = [
     spawnInterval: 1900,
     activeCategories: [WASTE_CATEGORIES.ORGANIC, WASTE_CATEGORIES.RECYCLE, WASTE_CATEGORIES.HAZARD],
     allowedHazardMisses: 2,
-    minPurityForWin: 0.85,
-    starThresholds: [0.85, 0.91, 0.96],
+    minPurityForWin: 0.75, // 75%
+    starThresholds: [0.75, 0.86, 0.95],
     factsTip: 'Limbah B3 seperti baterai mengandung racun berbahaya. Jangan sampai tercampur ke sampah organik atau selokan warga.'
   },
   {

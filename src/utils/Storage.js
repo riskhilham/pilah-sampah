@@ -17,22 +17,22 @@ export const Storage = {
       return {
         stars: Math.max(0, Math.min(3, stars)),
         score: score,
+        highScore: score,
         isCompleted: stars > 0
       };
     } catch (e) {
-      return { stars: 0, score: 0, isCompleted: false };
+      return { stars: 0, score: 0, highScore: 0, isCompleted: false };
     }
   },
 
   saveShiftProgress(level, stars, score) {
     try {
       const current = this.getShiftProgress(level);
-      if (stars > current.stars) {
-        localStorage.setItem(STORAGE_KEYS.STARS_PREFIX + level, stars.toString());
-      }
-      if (score > current.score) {
-        localStorage.setItem(STORAGE_KEYS.SCORE_PREFIX + level, score.toString());
-      }
+      const newStars = Math.max(parseInt(stars, 10) || 0, current.stars);
+      const newScore = Math.max(parseInt(score, 10) || 0, current.score);
+      
+      localStorage.setItem(STORAGE_KEYS.STARS_PREFIX + level, newStars.toString());
+      localStorage.setItem(STORAGE_KEYS.SCORE_PREFIX + level, newScore.toString());
       this.setLastSelectedShift(level);
     } catch (e) {
       console.warn('Storage save failed:', e);

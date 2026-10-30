@@ -135,30 +135,44 @@ export class ShiftSelectScene extends Phaser.Scene {
       const line = new Phaser.Geom.Line(p1.x, p1.y, p2.x, p2.y);
       const points = Phaser.Geom.Line.BresenhamPoints(line, 16);
 
+      const p1Prog = Storage.getShiftProgress(p1.level);
+      const isSegmentCompleted = p1Prog.isCompleted || p1Prog.stars > 0;
+
       points.forEach((pt, idx) => {
         if (idx % 2 === 0) {
-          // Outer soft glow
-          tg.fillStyle(0x0f172a, 0.7);
-          tg.fillCircle(pt.x, pt.y, 4.5);
-          // Inner bright dot
-          tg.fillStyle(0xfacc15, 0.9);
-          tg.fillCircle(pt.x, pt.y, 2.5);
+          if (isSegmentCompleted) {
+            // Bright glowing emerald green trail for completed routes
+            tg.fillStyle(0x0f291e, 0.85);
+            tg.fillCircle(pt.x, pt.y, 5);
+            tg.fillStyle(0x4ade80, 1);
+            tg.fillCircle(pt.x, pt.y, 2.8);
+          } else {
+            // Outer soft glow for future / locked routes
+            tg.fillStyle(0x0f172a, 0.7);
+            tg.fillCircle(pt.x, pt.y, 4.5);
+            tg.fillStyle(0x64748b, 0.6);
+            tg.fillCircle(pt.x, pt.y, 2);
+          }
         }
       });
 
       // 2. Dynamic Traveling Energy Orb along each segment
-      const orb = this.add.circle(p1.x, p1.y, 4, 0xffffff, 1);
-      orb.setStrokeStyle(2, 0xfacc15);
+      const p1Unlocked = (p1.level === 1) || Storage.getShiftProgress(p1.level - 1).isCompleted;
+      if (p1Unlocked) {
+        const orbColor = isSegmentCompleted ? 0x22c55e : 0xfacc15;
+        const orb = this.add.circle(p1.x, p1.y, 4, 0xffffff, 1);
+        orb.setStrokeStyle(2, orbColor);
 
-      this.tweens.add({
-        targets: orb,
-        x: p2.x,
-        y: p2.y,
-        duration: 1800 + i * 200,
-        repeat: -1,
-        ease: 'Linear',
-        delay: i * 350
-      });
+        this.tweens.add({
+          targets: orb,
+          x: p2.x,
+          y: p2.y,
+          duration: 1800 + i * 200,
+          repeat: -1,
+          ease: 'Linear',
+          delay: i * 350
+        });
+      }
     }
   }
 
@@ -168,12 +182,14 @@ export class ShiftSelectScene extends Phaser.Scene {
     this.districtNodes.forEach((nodeData, idx) => {
       const level = nodeData.level;
       const progress = Storage.getShiftProgress(level);
+      const isCompleted = progress.isCompleted || progress.stars > 0;
 
-      // Level 1 is always unlocked. Level N is unlocked if level N-1 has >= 1 star.
+      // Level 1 is always unlocked. Level N is unlocked if level N-1 has >= 1 star or completed.
       let isUnlocked = (level === 1);
       if (level > 1) {
         const prevProgress = Storage.getShiftProgress(level - 1);
-        if (prevProgress.stars > 0 || prevProgress.highScore > 0) {
+        const isPrevDone = prevProgress.isCompleted || prevProgress.stars > 0 || (prevProgress.score && prevProgress.score > 0);
+        if (isPrevDone) {
           isUnlocked = true;
         }
       }
@@ -186,8 +202,10 @@ export class ShiftSelectScene extends Phaser.Scene {
 
       // 1. Outer Pulsing Wave for unlocked levels
       if (isUnlocked) {
-        const pulse = this.add.circle(0, 0, 36, nodeData.color, 0);
-        pulse.setStrokeStyle(3, nodeData.highlightColor);
+        const pulseColor = isCompleted ? 0x16a34a : nodeData.color;
+        const pulseStroke = isCompleted ? 0x4ade80 : nodeData.highlightColor;
+        const pulse = this.add.circle(0, 0, 36, pulseColor, 0);
+        pulse.setStrokeStyle(3, pulseStroke);
         node.add(pulse);
 
         this.tweens.add({
@@ -210,18 +228,20 @@ export class ShiftSelectScene extends Phaser.Scene {
       bg.fillCircle(3, 5, btnRadius);
 
       // Outer Bezel Rim
+      const bezelColor = isCompleted ? 0x22c55e : (isUnlocked ? nodeData.highlightColor : 0x475569);
       bg.fillStyle(isUnlocked ? 0x0f172a : 0x1e293b, 1);
       bg.fillCircle(0, 0, btnRadius);
-      bg.lineStyle(3.5, isUnlocked ? nodeData.highlightColor : 0x475569, 1);
+      bg.lineStyle(isCompleted ? 4 : 3.5, bezelColor, 1);
       bg.strokeCircle(0, 0, btnRadius);
 
       // Inner Core
-      bg.fillStyle(isUnlocked ? nodeData.color : 0x334155, 1);
+      const coreColor = isCompleted ? 0x15803d : (isUnlocked ? nodeData.color : 0x334155);
+      bg.fillStyle(coreColor, 1);
       bg.fillCircle(0, 0, btnRadius - 5);
 
       // Glossy highlight arc on top
       if (isUnlocked) {
-        bg.fillStyle(0xffffff, 0.35);
+        bg.fillStyle(0xffffff, isCompleted ? 0.45 : 0.35);
         bg.beginPath();
         bg.arc(0, 0, btnRadius - 7, -Math.PI * 0.85, -Math.PI * 0.15, false);
         bg.closePath();
@@ -241,6 +261,26 @@ export class ShiftSelectScene extends Phaser.Scene {
           strokeThickness: 5
         }).setOrigin(0.5);
         node.add(numText);
+
+        // Green Checkmark Badge at top-right corner for COMPLETED level
+        if (isCompleted) {
+          const chkBox = this.add.container(btnRadius - 6, -btnRadius + 6);
+          const chkBg = this.add.graphics();
+          chkBg.fillStyle(0x22c55e, 1);
+          chkBg.fillCircle(0, 0, 13);
+          chkBg.lineStyle(2, 0xffffff, 1);
+          chkBg.strokeCircle(0, 0, 13);
+
+          const chkTxt = this.add.text(0, 0, '✓', {
+            fontFamily: "'Fredoka', sans-serif",
+            fontSize: '15px',
+            fontStyle: 'bold',
+            color: '#FFFFFF'
+          }).setOrigin(0.5);
+
+          chkBox.add([chkBg, chkTxt]);
+          node.add(chkBox);
+        }
       } else {
         const lockG = this.add.graphics();
         // Shackle
@@ -264,30 +304,33 @@ export class ShiftSelectScene extends Phaser.Scene {
       }
 
       // 4. District Name Plaque underneath
-      const plW = 138;
-      const plH = 24;
+      const plW = 142;
+      const plH = 26;
       const plY = 44;
 
       const plBg = this.add.graphics();
       plBg.fillStyle(0x0f172a, 0.95);
       plBg.fillRoundedRect(-plW / 2, plY - plH / 2, plW, plH, 6);
-      plBg.lineStyle(1.5, isUnlocked ? nodeData.highlightColor : 0x475569, 0.9);
+      const plaqueBorder = isCompleted ? 0x22c55e : (isUnlocked ? nodeData.highlightColor : 0x475569);
+      plBg.lineStyle(1.5, plaqueBorder, 0.9);
       plBg.strokeRoundedRect(-plW / 2, plY - plH / 2, plW, plH, 6);
 
-      const nameTxt = this.add.text(0, plY, nodeData.name.toUpperCase(), {
+      const nameTxt = this.add.text(0, plY, isCompleted ? `✓ ${nodeData.name.toUpperCase()}` : nodeData.name.toUpperCase(), {
         fontFamily: "'Fredoka', sans-serif",
-        fontSize: '11px',
+        fontSize: isCompleted ? '10.5px' : '11px',
         fontStyle: 'bold',
-        color: isUnlocked ? '#FFFFFF' : '#94A3B8'
+        color: isCompleted ? '#4ADE80' : (isUnlocked ? '#FFFFFF' : '#94A3B8')
       }).setOrigin(0.5);
 
       node.add([plBg, nameTxt]);
 
       // 5. Star Rating Bar (3 Stars)
-      const starY = plY + 20;
+      const starY = plY + 22;
       const starBg = this.add.graphics();
-      starBg.fillStyle(0x091017, 0.9);
-      starBg.fillRoundedRect(-42, starY - 10, 84, 20, 10);
+      starBg.fillStyle(0x091017, 0.95);
+      starBg.fillRoundedRect(-44, starY - 11, 88, 22, 11);
+      starBg.lineStyle(1, isCompleted ? 0x22c55e : 0x1e293b, 0.8);
+      starBg.strokeRoundedRect(-44, starY - 11, 88, 22, 11);
       node.add(starBg);
 
       for (let s = 1; s <= 3; s++) {
@@ -295,8 +338,8 @@ export class ShiftSelectScene extends Phaser.Scene {
         const isEarned = (s <= progress.stars);
         const star = this.add.text(sx, starY, '★', {
           fontFamily: "'Fredoka', sans-serif",
-          fontSize: '15px',
-          color: isEarned ? '#FBBF24' : '#334155'
+          fontSize: '16px',
+          color: isEarned ? '#FBBF24' : '#475569'
         }).setOrigin(0.5);
         node.add(star);
       }
@@ -327,8 +370,17 @@ export class ShiftSelectScene extends Phaser.Scene {
       });
     });
 
-    // 6. Animated "DI SINI!" pointer on the latest unlocked level
-    const activeTargetNode = this.districtNodes.find(d => d.level === latestUnlockedLevel) || this.districtNodes[0];
+    // 6. Animated "DI SINI!" pointer on the current progression level
+    // Finds the earliest unlocked level that hasn't been completed yet, or the highest unlocked
+    let targetProgressionLevel = 1;
+    for (let l = 1; l <= 6; l++) {
+      const p = Storage.getShiftProgress(l);
+      if (!p.isCompleted) {
+        targetProgressionLevel = l;
+        break;
+      }
+    }
+    const activeTargetNode = this.districtNodes.find(d => d.level === targetProgressionLevel) || this.districtNodes.find(d => d.level === latestUnlockedLevel) || this.districtNodes[0];
     this.createActiveLevelIndicator(activeTargetNode.x, activeTargetNode.y);
   }
 
@@ -453,6 +505,25 @@ export class ShiftSelectScene extends Phaser.Scene {
     closeBtn.on('pointerover', () => closeBtn.setScale(1.2));
     closeBtn.on('pointerout', () => closeBtn.setScale(1.0));
 
+    // Completed Status Badge in Header Ribbon
+    const isCompleted = progress.isCompleted || progress.stars > 0;
+    if (isCompleted) {
+      const doneTag = this.add.graphics();
+      doneTag.fillStyle(0x166534, 1);
+      doneTag.fillRoundedRect(cardX + cardW / 2 - 225, cardY - cardH / 2 + 18, 175, 28, 14);
+      doneTag.lineStyle(1.5, 0x4ade80, 1);
+      doneTag.strokeRoundedRect(cardX + cardW / 2 - 225, cardY - cardH / 2 + 18, 175, 28, 14);
+
+      const doneTxt = this.add.text(cardX + cardW / 2 - 137, cardY - cardH / 2 + 32, '✓ SUDAH LULUS', {
+        fontFamily: "'Fredoka', sans-serif",
+        fontSize: '13px',
+        fontStyle: 'bold',
+        color: '#FFFFFF'
+      }).setOrigin(0.5);
+
+      modal.add([doneTag, doneTxt]);
+    }
+
     // Description Box
     const storyBox = this.add.graphics();
     storyBox.fillStyle(0x0a1017, 0.9);
@@ -545,24 +616,28 @@ export class ShiftSelectScene extends Phaser.Scene {
       color: '#FBBF24'
     }).setOrigin(0.5);
 
-    // Primary Action Button: [ MULAI MAIN SEKARANG ▶ ]
+    // Primary Action Button: [ MULAI MAIN / MAIN ULANG ]
     const btnY = cardY + cardH / 2 - 44;
     const launchBtn = this.add.container(cardX, btnY);
     const lbg = this.add.graphics();
-    lbg.fillStyle(nodeData.color, 1);
-    lbg.fillRoundedRect(-190, -23, 380, 46, 8);
-    lbg.lineStyle(2, 0xffffff, 0.7);
-    lbg.strokeRoundedRect(-190, -23, 380, 46, 8);
+    lbg.fillStyle(isCompleted ? 0x16a34a : nodeData.color, 1);
+    lbg.fillRoundedRect(-195, -23, 390, 46, 8);
+    lbg.lineStyle(2, 0xffffff, 0.75);
+    lbg.strokeRoundedRect(-195, -23, 390, 46, 8);
 
-    const ltxt = this.add.text(0, 0, `MULAI MAIN LEVEL ${nodeData.level} SEKARANG ▶`, {
+    const btnLabel = isCompleted
+      ? `MAIN ULANG LEVEL ${nodeData.level} (ASAH SKOR) ↺`
+      : `MULAI MAIN LEVEL ${nodeData.level} SEKARANG ▶`;
+
+    const ltxt = this.add.text(0, 0, btnLabel, {
       fontFamily: "'Fredoka', sans-serif",
-      fontSize: '17px',
+      fontSize: isCompleted ? '15.5px' : '17px',
       fontStyle: 'bold',
       color: '#FFFFFF'
     }).setOrigin(0.5);
 
     launchBtn.add([lbg, ltxt]);
-    const launchHit = this.add.rectangle(0, 0, 380, 46, 0x000000, 0.001);
+    const launchHit = this.add.rectangle(0, 0, 390, 46, 0x000000, 0.001);
     launchHit.setInteractive({ useHandCursor: true });
     launchBtn.add(launchHit);
 
@@ -574,7 +649,7 @@ export class ShiftSelectScene extends Phaser.Scene {
     launchHit.on('pointerover', () => launchBtn.setScale(1.03));
     launchHit.on('pointerout', () => launchBtn.setScale(1.0));
 
-    modal.add([title, closeBtn, desc, targetTxt, recTxt, launchBtn]);
+    modal.add([title, closeBtn, desc, recTxt, launchBtn]);
 
     this.previewModal = modal;
   }
