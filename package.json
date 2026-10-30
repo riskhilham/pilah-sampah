@@ -1,5 +1,5 @@
 {
-  "name": "ecosort-fasilitas-sirkular",
+  "name": "pilah-sampah",
   "version": "1.0.0",
   "description": "Game edukasi interaktif pemilahan sampah 4 kategori dengan Phaser 3 dan Vite",
   "type": "module",

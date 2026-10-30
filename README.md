@@ -1,5 +1,5 @@
-# 🌿 EcoSort: Fasilitas Sirkular
-### *Professional Asset-First Educational Sorting Game*
+# 🌿 Pilah Sampah: Pahlawan Kebersihan Kota
+### *Game Edukasi Interaktif Pemilahan Sampah 4 Kategori*
 
 Game edukasi interaktif berbasis web yang mengajarkan prinsip **Ekologi Kota & Ekonomi Sirkular** melalui mekanika pemilahan sampah 4 kategori berkecepatan tinggi yang taktil dan menyenangkan.
 
@@ -35,13 +35,16 @@ Dikembangkan menggunakan **Phaser 3**, **Vite 6**, dan arsitektur modular modern
 ### 1. Menjalankan di Mode Pengembangan (Local Dev Server)
 Pastikan Node.js (v18+) terpasang di komputer Anda.
 ```bash
-# Masuk ke direktori game
-cd c:\laragon\www\mpi\game2
+# Masuk ke direktori proyek
+cd pilah-sampah
+
+# Pasang dependensi (jika baru pertama kali)
+npm install
 
 # Jalankan server lokal Vite
 npm run dev
 ```
-Buka browser dan akses: **`http://localhost:3000/`**
+Buka browser dan akses URL lokal yang ditampilkan (default: **`http://localhost:3000/`**).
 
 ### 2. Membangun Versi Rilis Produksi (Production Build)
 ```bash
@@ -55,9 +58,9 @@ Hasil kompilasi siap saji akan berada di folder **`dist/`**. Folder ini bersifat
 
 Karena game ini dibangun sebagai **Single Page Application (SPA) Statik**, game dapat di-deploy dengan sangat mudah ke berbagai platform:
 
-### Opsi A: Server Lokal Sekolah / Laragon (Offline Lab Friendly)
-* Salin seluruh isi folder `dist/` ke direktori web server sekolah (misal: Laragon `c:\laragon\www\ecosort` atau XAMPP `htdocs/ecosort`).
-* Seluruh komputer lab siswa dapat mengakses game via IP LAN lokal sekolah (misal: `http://192.168.1.50/ecosort`) **tanpa memerlukan koneksi internet**.
+### Opsi A: Server Lokal Sekolah / Web Server (Offline Lab Friendly)
+* Salin seluruh isi folder `dist/` ke direktori web server (misalnya direktori `htdocs/pilah-sampah` pada XAMPP atau `www/pilah-sampah` pada Laragon/Nginx/Apache).
+* Seluruh komputer lab siswa dapat mengakses game via IP LAN lokal sekolah (misal: `http://192.168.1.50/pilah-sampah`) **tanpa memerlukan koneksi internet**.
 
 ### Opsi B: Vercel / Netlify (Zero-Config Cloud Hosting)
 1. Hubungkan repositori Git ke Vercel atau Netlify.
@@ -68,14 +71,14 @@ Karena game ini dibangun sebagai **Single Page Application (SPA) Statik**, game 
 ### Opsi C: GitHub Pages
 1. Pasang paket `gh-pages` (`npm i -D gh-pages`).
 2. Tambahkan script rilis di `package.json`: `"deploy": "gh-pages -d dist"`.
-3. Jalankan `npm run deploy` untuk hosting gratis di domain `username.github.io/ecosort`.
+3. Jalankan `npm run deploy` untuk hosting gratis di domain `username.github.io/pilah-sampah`.
 
 ---
 
 ## 📁 Struktur Berkas Proyek
 
 ```
-game2/
+pilah-sampah/
 ├── index.html                     # Entry HTML dengan viewport setup dan web fonts
 ├── package.json                   # Definisi dependencies & script Vite
 ├── vite.config.js                 # Konfigurasi Vite
@@ -101,8 +104,10 @@ game2/
 │   │   ├── ConveyorBelt.js        # Sabuk konveyor modular
 │   │   ├── SortingBin.js          # 4 Tong sudut interaktif (drop targets)
 │   │   └── WasteItem.js           # Entitas sampah dengan draggable physics
-│   └── audio/
-│       └── SoundManager.js        # Synthesizer audio prosedural Web Audio API
+│   ├── audio/
+│   │   └── SoundManager.js        # Synthesizer audio prosedural Web Audio API
+│   └── utils/
+│       └── Storage.js             # Penyimpanan progress level & skor (LocalStorage)
 └── Dokumen Desain & Audit:
     ├── PROJECT_STATE.md           # Pelacakan status fase & keputusan proyek
     ├── GAME_DESIGN.md             # Game Design Document lengkap
@@ -115,6 +120,5 @@ game2/
 
 ---
 
-## 📜 Lisensi & Kepatuhan Edukasi
-Proyek ini dirancang untuk mendukung pembelajaran **Kurikulum Merdeka (Projek P5 - Tema Gaya Hidup Berkelanjutan)** dan program sekolah Adiwiyata.
-
+## 📜 Lisensi & Catatan Edukasi
+Proyek ini dirancang sebagai media pembelajaran interaktif untuk mendukung edukasi gaya hidup berkelanjutan, kepedulian lingkungan hidup, dan program sekolah Adiwiyata.
