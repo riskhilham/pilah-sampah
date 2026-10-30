@@ -19,8 +19,9 @@ try {
   const dpr = typeof window !== 'undefined' ? Math.max(2, Math.min(window.devicePixelRatio || 2, 3)) : 2;
   const originalSetStyle = Phaser.GameObjects.TextStyle.prototype.setStyle;
   Phaser.GameObjects.TextStyle.prototype.setStyle = function(style, updateText, setDefaults) {
-    if (style && style.resolution === undefined) {
-      style.resolution = dpr;
+    if (style) {
+      if (style.resolution === undefined) style.resolution = dpr;
+      if (!style.padding) style.padding = { x: 4, y: 3 };
     }
     return originalSetStyle.call(this, style, updateText, setDefaults);
   };
@@ -49,6 +50,7 @@ const config = {
     pixelArt: false,
     antialias: true,
     antialiasGL: true,
+    mipmapFilter: 'LINEAR_MIPMAP_LINEAR',
     roundPixels: false,
     powerPreference: 'high-performance'
   },
@@ -68,9 +70,20 @@ const initGame = () => {
   new Phaser.Game(config);
 };
 
-if (document.readyState === 'loading') {
-  window.addEventListener('DOMContentLoaded', initGame);
-} else {
+const startApp = async () => {
+  if (typeof document !== 'undefined' && document.fonts && document.fonts.ready) {
+    try {
+      await document.fonts.ready;
+    } catch (e) {
+      console.warn('Font loading ready check bypassed:', e);
+    }
+  }
   initGame();
+};
+
+if (document.readyState === 'loading') {
+  window.addEventListener('DOMContentLoaded', startApp);
+} else {
+  startApp();
 }
 

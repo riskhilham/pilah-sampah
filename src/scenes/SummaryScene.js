@@ -218,9 +218,9 @@ export class SummaryScene extends Phaser.Scene {
 
     this.add.text(x, y - 14, label, {
       fontFamily: "'Chakra Petch', sans-serif",
-      fontSize: '11px',
+      fontSize: '13px',
       fontStyle: 'bold',
-      color: '#94A3B8'
+      color: '#CBD5E1'
     }).setOrigin(0.5);
 
     this.add.text(x, y + 10, val, {

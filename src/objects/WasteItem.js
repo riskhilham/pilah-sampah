@@ -92,11 +92,11 @@ export class WasteItem extends Phaser.GameObjects.Container {
     const displayName = (this.trait === 'GOLDEN') ? `★ ${itemData.name}` : itemData.name;
     this.nameLabel = scene.add.text(0, 56, displayName, {
       fontFamily: "'Plus Jakarta Sans', sans-serif",
-      fontSize: '11px',
+      fontSize: '13.5px',
       fontStyle: 'bold',
-      color: (this.trait === 'GOLDEN') ? '#FBBF24' : '#F8FAFC',
+      color: (this.trait === 'GOLDEN') ? '#FBBF24' : '#FFFFFF',
       backgroundColor: '#090d16',
-      padding: { x: 7, y: 3 }
+      padding: { x: 8, y: 4 }
     }).setOrigin(0.5);
     this.add(this.nameLabel);
 

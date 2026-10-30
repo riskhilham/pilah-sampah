@@ -302,7 +302,7 @@ export class CatalogScene extends Phaser.Scene {
     const locTag = item.locationTag || 'SEKOLAH';
     const locText = this.add.text(cardW - 14, 23, `[ ${locTag} ]`, {
       fontFamily: "'Chakra Petch', monospace",
-      fontSize: '11px',
+      fontSize: '12.5px',
       fontStyle: 'bold',
       color: '#38BDF8'
     }).setOrigin(1, 0.5);
@@ -584,7 +584,7 @@ export class CatalogScene extends Phaser.Scene {
     // Location Tag Badge
     const locTagText = this.add.text(145, 178, `LOKASI: ${item.locationTag || 'LINGKUNGAN SEKOLAH'}`, {
       fontFamily: "'Chakra Petch', sans-serif",
-      fontSize: '11px',
+      fontSize: '13px',
       fontStyle: 'bold',
       color: '#38BDF8'
     }).setOrigin(0.5);
@@ -598,9 +598,9 @@ export class CatalogScene extends Phaser.Scene {
 
     const decompLabel = this.add.text(26, 212, 'WAKTU TERURAI DI ALAM:', {
       fontFamily: "'Chakra Petch', monospace",
-      fontSize: '10.5px',
+      fontSize: '12px',
       fontStyle: 'bold',
-      color: '#94A3B8'
+      color: '#CBD5E1'
     });
 
     const decompVal = this.add.text(26, 230, item.decomposeTime, {
@@ -633,7 +633,7 @@ export class CatalogScene extends Phaser.Scene {
 
     const binHeading = this.add.text(145, 320, 'TUJUAN PEMILAHAN:', {
       fontFamily: "'Chakra Petch', sans-serif",
-      fontSize: '11px',
+      fontSize: '13px',
       fontStyle: 'bold',
       color: '#FFFFFF'
     }).setOrigin(0.5);

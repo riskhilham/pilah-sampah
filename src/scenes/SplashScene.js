@@ -85,11 +85,11 @@ export class SplashScene extends Phaser.Scene {
     // Footer Hint
     const footHint = this.add.text(w / 2, h - 22, 'MEMUAT SISTEM & DATA SAMPAH SEKOLAH... MOHON TUNGGU SEBENTAR', {
       fontFamily: "'Chakra Petch', sans-serif",
-      fontSize: '11px',
+      fontSize: '13px',
       fontStyle: 'bold',
-      color: '#94A3B8',
+      color: '#CBD5E1',
       stroke: '#050a12',
-      strokeThickness: 2
+      strokeThickness: 3
     }).setOrigin(0.5);
 
     // Progress Tween over 2000ms
@@ -203,11 +203,11 @@ export class SplashScene extends Phaser.Scene {
     // Sub-Hint Text
     this.add.text(w / 2, h - 22, 'KLIK TOMBOL DI ATAS / TEKAN SPASI UNTUK MULAI PERMAINAN', {
       fontFamily: "'Chakra Petch', sans-serif",
-      fontSize: '11px',
+      fontSize: '13.5px',
       fontStyle: 'bold',
-      color: '#CBD5E1',
+      color: '#F8FAFC',
       stroke: '#050a12',
-      strokeThickness: 2
+      strokeThickness: 3
     }).setOrigin(0.5);
 
     // Reliable Scene Transition Handler

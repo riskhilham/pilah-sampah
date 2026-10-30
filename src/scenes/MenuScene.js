@@ -131,7 +131,7 @@ export class MenuScene extends Phaser.Scene {
 
     const audioText = this.add.text(0, 0, sounds.isMuted ? 'AUDIO: OFF' : 'AUDIO: ON', {
       fontFamily: "'Chakra Petch', sans-serif",
-      fontSize: '11px',
+      fontSize: '12.5px',
       fontStyle: 'bold',
       color: sounds.isMuted ? '#94A3B8' : '#4ADE80'
     }).setOrigin(0.5);

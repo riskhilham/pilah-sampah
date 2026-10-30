@@ -419,9 +419,9 @@ export class GameScene extends Phaser.Scene {
       // Stenciled Floor Text
       this.add.text(z.x, z.y + 86, z.label, {
         fontFamily: "'Chakra Petch', sans-serif",
-        fontSize: '11px',
+        fontSize: '13px',
         fontStyle: 'bold',
-        color: '#64748B'
+        color: '#94A3B8'
       }).setOrigin(0.5);
     });
   }
@@ -509,10 +509,10 @@ export class GameScene extends Phaser.Scene {
     edgeVignette.fillRect(0, h - 70, w, 70);
 
     // 3. District Intake Chute Header Plate (Mounted above left conveyor inlet)
-    const inX = 145;
-    const inY = 330;
-    const inW = 280;
-    const inH = 42;
+    const inX = 165;
+    const inY = 328;
+    const inW = 320;
+    const inH = 48;
 
     const inBg = this.add.graphics();
     inBg.fillStyle(0x0f172a, 0.95);
@@ -530,17 +530,18 @@ export class GameScene extends Phaser.Scene {
       repeat: -1
     });
 
-    this.add.text(inX - inW / 2 + 26, inY - 9, p.districtName, {
+    this.add.text(inX - inW / 2 + 28, inY - 11, p.districtName, {
       fontFamily: "'Chakra Petch', sans-serif",
-      fontSize: '11px',
+      fontSize: '13px',
       fontStyle: 'bold',
       color: '#FFFFFF'
     });
 
-    this.add.text(inX - inW / 2 + 26, inY + 6, `${p.timeBadge} • JALUR BONGKAR MUAT`, {
+    this.add.text(inX - inW / 2 + 28, inY + 8, `${p.timeBadge} • JALUR BONGKAR MUAT`, {
       fontFamily: "'Chakra Petch', monospace",
-      fontSize: '9.5px',
-      color: '#94A3B8'
+      fontSize: '11.5px',
+      fontStyle: 'bold',
+      color: '#CBD5E1'
     });
 
     // 4. Ambient Drifting Atmospheric Particles (7 subtle floating motes)

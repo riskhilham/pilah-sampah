@@ -40,18 +40,13 @@ export class ShiftSelectScene extends Phaser.Scene {
 
     sounds.init();
 
-    // 1. Illustrated City Overworld Map Backdrop
+    // 1. Illustrated City Overworld Map Backdrop (Vibrant clean HD)
     if (this.textures.exists('map_city_overworld')) {
       this.add.image(w / 2, h / 2, 'map_city_overworld')
         .setDisplaySize(w, h);
     } else {
       this.add.rectangle(w / 2, h / 2, w, h, 0x111e2e);
     }
-
-    // Soft cinematic contrast scrim
-    const scrim = this.add.graphics();
-    scrim.fillStyle(0x050a10, 0.22);
-    scrim.fillRect(0, 0, w, h);
 
     // 2. District Landmark Coordinates matched PRECISELY to illustrated artwork pins (6 Levels)
     this.districtNodes = [
@@ -433,7 +428,7 @@ export class ShiftSelectScene extends Phaser.Scene {
 
     const txt = this.add.text(0, 0, 'SELESAIKAN LEVEL SEBELUMNYA YA!', {
       fontFamily: "'Fredoka', sans-serif",
-      fontSize: '11px',
+      fontSize: '13px',
       fontStyle: 'bold',
       color: '#FFFFFF'
     }).setOrigin(0.5);
@@ -572,16 +567,16 @@ export class ShiftSelectScene extends Phaser.Scene {
       sbg.strokeRoundedRect(sx - statBoxW / 2, targetY - statBoxH / 2, statBoxW, statBoxH, 6);
       modal.add(sbg);
 
-      const slbl = this.add.text(sx, targetY - 12, st.label, {
+      const slbl = this.add.text(sx, targetY - 13, st.label, {
         fontFamily: "'Chakra Petch', sans-serif",
-        fontSize: '11px',
+        fontSize: '12.5px',
         fontStyle: 'bold',
         color: '#94A3B8'
       }).setOrigin(0.5);
 
-      const sval = this.add.text(sx, targetY + 10, st.val, {
+      const sval = this.add.text(sx, targetY + 11, st.val, {
         fontFamily: "'Fredoka', sans-serif",
-        fontSize: '15.5px',
+        fontSize: '16.5px',
         fontStyle: 'bold',
         color: st.col
       }).setOrigin(0.5);
@@ -595,23 +590,23 @@ export class ShiftSelectScene extends Phaser.Scene {
     modal.add(streamContainer);
 
     const streamBadges = nodeData.streams || ['ORGANIK', 'DAUR ULANG'];
-    let curX = -((streamBadges.length * 108) / 2) + 54;
+    let curX = -((streamBadges.length * 114) / 2) + 57;
     streamBadges.forEach(str => {
       const badgeG = this.add.graphics();
-      badgeG.fillStyle(0x131f2e, 0.9);
-      badgeG.fillRoundedRect(curX - 50, -12, 100, 24, 4);
-      badgeG.lineStyle(1, nodeData.highlightColor, 0.6);
-      badgeG.strokeRoundedRect(curX - 50, -12, 100, 24, 4);
+      badgeG.fillStyle(0x131f2e, 0.95);
+      badgeG.fillRoundedRect(curX - 54, -13, 108, 26, 6);
+      badgeG.lineStyle(1.5, nodeData.highlightColor, 0.8);
+      badgeG.strokeRoundedRect(curX - 54, -13, 108, 26, 6);
 
       const badgeT = this.add.text(curX, 0, str, {
         fontFamily: "'Chakra Petch', monospace",
-        fontSize: '11px',
+        fontSize: '12.5px',
         fontStyle: 'bold',
         color: '#FFFFFF'
       }).setOrigin(0.5);
 
       streamContainer.add([badgeG, badgeT]);
-      curX += 108;
+      curX += 114;
     });
 
     // Personal Records
@@ -682,9 +677,9 @@ export class ShiftSelectScene extends Phaser.Scene {
       color: '#FFFFFF'
     }).setOrigin(0.5);
 
-    const subTxt = this.add.text(0, 11, 'PILIH DISTRIK (LEVEL 1 - 6) UNTUK MULAI MEMILAH', {
+    const subTxt = this.add.text(0, 12, 'PILIH DISTRIK (LEVEL 1 - 6) UNTUK MULAI MEMILAH', {
       fontFamily: "'Chakra Petch', sans-serif",
-      fontSize: '10px',
+      fontSize: '12.5px',
       fontStyle: 'bold',
       color: '#38BDF8'
     }).setOrigin(0.5);
@@ -705,7 +700,7 @@ export class ShiftSelectScene extends Phaser.Scene {
 
     const starTxt = this.add.text(0, 0, `★ ${totalStars} / 18 BINTANG`, {
       fontFamily: "'Chakra Petch', sans-serif",
-      fontSize: '13px',
+      fontSize: '14.5px',
       fontStyle: 'bold',
       color: '#FBBF24'
     }).setOrigin(0.5);
@@ -734,7 +729,7 @@ export class ShiftSelectScene extends Phaser.Scene {
 
     const btxt = this.add.text(0, 0, '◀ KEMBALI KE MENU', {
       fontFamily: "'Fredoka', sans-serif",
-      fontSize: '13.5px',
+      fontSize: '14px',
       fontStyle: 'bold',
       color: '#FFFFFF'
     }).setOrigin(0.5);
@@ -754,9 +749,9 @@ export class ShiftSelectScene extends Phaser.Scene {
     // Footer Hint
     this.add.text(w / 2 + 60, footY + 10, 'TIPS: DAPATKAN MINIMAL 1 BINTANG UNTUK MEMBUKA LEVEL BERIKUTNYA', {
       fontFamily: "'Chakra Petch', sans-serif",
-      fontSize: '11px',
+      fontSize: '13px',
       fontStyle: 'bold',
-      color: '#94A3B8'
+      color: '#E2E8F0'
     }).setOrigin(0.5);
   }
 }

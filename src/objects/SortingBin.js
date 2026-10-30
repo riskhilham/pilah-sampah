@@ -83,21 +83,21 @@ export class SortingBin extends Phaser.GameObjects.Container {
 
     // 6. Subtitle / Example items pill (Bottom of Bin)
     const subY = 82;
-    const subW = 188;
-    const subH = 20;
+    const subW = 206;
+    const subH = 25;
 
     this.subG = scene.add.graphics();
-    this.subG.fillStyle(0x070c12, 0.88);
+    this.subG.fillStyle(0x070c12, 0.92);
     this.subG.fillRoundedRect(-subW / 2, subY - subH / 2, subW, subH, 6);
-    this.subG.lineStyle(1.5, 0x334155, 0.8);
+    this.subG.lineStyle(1.5, config.accentColor || 0x38bdf8, 0.85);
     this.subG.strokeRoundedRect(-subW / 2, subY - subH / 2, subW, subH, 6);
     this.add(this.subG);
 
     this.subText = scene.add.text(0, subY, config.subtitle || '', {
       fontFamily: "'Plus Jakarta Sans', sans-serif",
-      fontSize: '10px',
+      fontSize: '13px',
       fontStyle: 'bold',
-      color: '#CBD5E1',
+      color: '#FFFFFF',
       align: 'center'
     }).setOrigin(0.5);
     this.add(this.subText);

@@ -124,9 +124,9 @@ export class HUDScene extends Phaser.Scene {
 
     this.add.text(purityX + 14, 28, 'AKURASI PILAH', {
       fontFamily: "'Chakra Petch', sans-serif",
-      fontSize: '12px',
+      fontSize: '13px',
       fontStyle: 'bold',
-      color: '#94A3B8'
+      color: '#CBD5E1'
     });
 
     // Gauge track
@@ -158,7 +158,7 @@ export class HUDScene extends Phaser.Scene {
 
     this.add.text(hazX + 12, 28, 'KESEMPATAN B3', {
       fontFamily: "'Chakra Petch', sans-serif",
-      fontSize: '12px',
+      fontSize: '13px',
       fontStyle: 'bold',
       color: '#F87171'
     });
@@ -330,7 +330,7 @@ export class HUDScene extends Phaser.Scene {
 
     this.guideText = this.add.text(w / 2, tickerY + 16, '[PANDUAN] SERET SAMPAH KE TONG SUDUT • TOMBOL: [Q, W, E, R] • BANTUAN CEPAT: [H / P] • JEDA: [ESC]', {
       fontFamily: "'Chakra Petch', sans-serif",
-      fontSize: '12px',
+      fontSize: '13.5px',
       fontStyle: 'bold',
       color: '#FBBF24'
     }).setOrigin(0.5);
@@ -666,9 +666,9 @@ export class HUDScene extends Phaser.Scene {
       color: '#FFFFFF'
     });
 
-    const sub = this.add.text(mX - mWidth / 2 + 24, mY - mHeight / 2 + 40, 'PELAJARI CIRI SAMPAH, WARNA TONG, DAN TOMBOL PINTAS KONVEYOR [Q, W, E, R]', {
+    const sub = this.add.text(mX - mWidth / 2 + 24, mY - mHeight / 2 + 42, 'PELAJARI CIRI SAMPAH, WARNA TONG, DAN TOMBOL PINTAS KONVEYOR [Q, W, E, R]', {
       fontFamily: "'Chakra Petch', sans-serif",
-      fontSize: '11px',
+      fontSize: '13px',
       fontStyle: 'bold',
       color: '#38BDF8'
     });
@@ -763,7 +763,7 @@ export class HUDScene extends Phaser.Scene {
 
       const cBin = this.add.text(0, -colH / 2 + 33, cat.bin, {
         fontFamily: "'Chakra Petch', sans-serif",
-        fontSize: '11px',
+        fontSize: '13px',
         fontStyle: 'bold',
         color: cat.hex
       }).setOrigin(0.5);
@@ -771,30 +771,32 @@ export class HUDScene extends Phaser.Scene {
       // Content blocks
       const t1 = this.add.text(0, -colH / 2 + 62, 'CIRI UTAMA:', {
         fontFamily: "'Chakra Petch', sans-serif",
-        fontSize: '11px',
+        fontSize: '12.5px',
         fontStyle: 'bold',
-        color: '#94A3B8'
+        color: '#E2E8F0'
       }).setOrigin(0.5);
 
       const b1 = this.add.text(0, -colH / 2 + 88, cat.trait, {
         fontFamily: "'Plus Jakarta Sans', sans-serif",
-        fontSize: '12px',
-        color: '#ECEFF1',
+        fontSize: '13px',
+        fontStyle: '500',
+        color: '#FFFFFF',
         align: 'center',
         wordWrap: { width: colW - 20 }
       }).setOrigin(0.5);
 
       const t2 = this.add.text(0, -colH / 2 + 130, 'CONTOH DI SEKOLAH / RUMAH:', {
         fontFamily: "'Chakra Petch', sans-serif",
-        fontSize: '11px',
+        fontSize: '12.5px',
         fontStyle: 'bold',
         color: cat.hex
       }).setOrigin(0.5);
 
       const b2 = this.add.text(0, -colH / 2 + 185, cat.examples, {
         fontFamily: "'Plus Jakarta Sans', sans-serif",
-        fontSize: '11.5px',
-        color: '#CBD5E1',
+        fontSize: '13px',
+        fontStyle: 'bold',
+        color: '#FFFFFF',
         align: 'center',
         lineSpacing: 2,
         wordWrap: { width: colW - 20 }
@@ -802,15 +804,16 @@ export class HUDScene extends Phaser.Scene {
 
       const t3 = this.add.text(0, -colH / 2 + 250, 'TUJUAN PENGOLAHAN:', {
         fontFamily: "'Chakra Petch', sans-serif",
-        fontSize: '11px',
+        fontSize: '12.5px',
         fontStyle: 'bold',
         color: '#38BDF8'
       }).setOrigin(0.5);
 
       const b3 = this.add.text(0, -colH / 2 + 288, cat.destination, {
         fontFamily: "'Plus Jakarta Sans', sans-serif",
-        fontSize: '11.5px',
-        color: '#93C5FD',
+        fontSize: '13px',
+        fontStyle: 'bold',
+        color: '#BAE6FD',
         align: 'center',
         lineSpacing: 2,
         wordWrap: { width: colW - 20 }
