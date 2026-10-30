@@ -153,7 +153,13 @@
     </div>
   </div>
 
-  <script type="module" src="/src/main.js"></script>
+  <script type="module">
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+      import('/src/main.js');
+    } else {
+      import('./assets/index.js');
+    }
+  </script>
 </body>
 </html>
 
