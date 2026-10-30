@@ -211,7 +211,7 @@ export class GameScene extends Phaser.Scene {
 
     const subTitleText = this.add.text(bX, bY - bH / 2 + 96, cfg.subtitle, {
       fontFamily: "'Chakra Petch', sans-serif",
-      fontSize: '14px',
+      fontSize: '15px',
       fontStyle: 'bold',
       color: '#FBBF24'
     }).setOrigin(0.5);
@@ -219,29 +219,30 @@ export class GameScene extends Phaser.Scene {
     // Narrative Lore Box
     const loreBox = this.add.graphics();
     loreBox.fillStyle(0x0a1017, 0.9);
-    loreBox.fillRoundedRect(bX - bW / 2 + 30, bY - 90, bW - 60, 95, 8);
+    loreBox.fillRoundedRect(bX - bW / 2 + 30, bY - 92, bW - 60, 100, 8);
     loreBox.lineStyle(1.5, 0x1e293b, 1);
-    loreBox.strokeRoundedRect(bX - bW / 2 + 30, bY - 90, bW - 60, 95, 8);
+    loreBox.strokeRoundedRect(bX - bW / 2 + 30, bY - 92, bW - 60, 100, 8);
     overlay.add(loreBox);
 
     const descText = this.add.text(bX, bY - 42, cfg.description, {
       fontFamily: "'Plus Jakarta Sans', sans-serif",
-      fontSize: '14px',
+      fontSize: '15.5px',
       color: '#E2E8F0',
+      lineSpacing: 5,
       align: 'center',
-      wordWrap: { width: bW - 100 }
+      wordWrap: { width: bW - 80 }
     }).setOrigin(0.5);
 
     // Target Metrics Grid
     const metricsY = bY + 50;
     const mBg = this.add.graphics();
     mBg.fillStyle(0x131f2b, 1);
-    mBg.fillRoundedRect(bX - bW / 2 + 30, metricsY - 25, bW - 60, 52, 6);
+    mBg.fillRoundedRect(bX - bW / 2 + 30, metricsY - 26, bW - 60, 52, 6);
     overlay.add(mBg);
 
     const mText = this.add.text(bX, metricsY, `TARGET: ${cfg.targetItems} Sampah   |   WAKTU: ${cfg.timeLimitSeconds}s   |   MIN. AKURASI: ${Math.round(cfg.minPurityForWin * 100)}%   |   BATAS KESALAHAN B3: ${cfg.allowedHazardMisses}x`, {
       fontFamily: "'Chakra Petch', monospace",
-      fontSize: '13px',
+      fontSize: '13.5px',
       fontStyle: 'bold',
       color: '#4ADE80'
     }).setOrigin(0.5);
@@ -251,19 +252,19 @@ export class GameScene extends Phaser.Scene {
     const startBtn = this.add.container(bX, btnY);
     const sbg = this.add.graphics();
     sbg.fillStyle(0x16a34a, 1);
-    sbg.fillRoundedRect(-180, -24, 360, 48, 8);
-    sbg.lineStyle(2, 0xffffff, 0.5);
-    sbg.strokeRoundedRect(-180, -24, 360, 48, 8);
+    sbg.fillRoundedRect(-190, -25, 380, 50, 8);
+    sbg.lineStyle(2, 0xffffff, 0.6);
+    sbg.strokeRoundedRect(-190, -25, 380, 50, 8);
 
     const stxt = this.add.text(0, 0, 'MULAI MAIN SEKARANG ▶', {
       fontFamily: "'Fredoka', sans-serif",
-      fontSize: '17px',
+      fontSize: '18px',
       fontStyle: 'bold',
       color: '#FFFFFF'
     }).setOrigin(0.5);
 
     startBtn.add([sbg, stxt]);
-    startBtn.setSize(360, 48);
+    startBtn.setSize(380, 50);
     startBtn.setInteractive({ useHandCursor: true });
 
     startBtn.on('pointerdown', () => {

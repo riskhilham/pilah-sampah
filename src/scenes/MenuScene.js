@@ -512,14 +512,14 @@ export class MenuScene extends Phaser.Scene {
 
     const pTitle = this.add.text(mX - 520, topY - 24, '🌿 LATAR BELAKANG & TUJUAN EDUKASI PEMILAHAN SAMPAH', {
       fontFamily: "'Chakra Petch', sans-serif",
-      fontSize: '13px',
+      fontSize: '14px',
       fontStyle: 'bold',
       color: '#4ADE80'
     });
 
     const pDesc = this.add.text(mX - 520, topY - 3, 'Media Pembelajaran Interaktif (MPI) ini dirancang untuk menumbuhkan kepedulian lingkungan dan kebiasaan memilah sampah sejak dini.\nPemain diajak melatih kecepatan dan ketepatan memilah 4 kategori sampah modern sebelum mencemari lingkungan perkotaan.', {
       fontFamily: "'Plus Jakarta Sans', sans-serif",
-      fontSize: '13px',
+      fontSize: '13.5px',
       color: '#E2E8F0',
       lineSpacing: 4
     });
@@ -602,7 +602,7 @@ export class MenuScene extends Phaser.Scene {
 
       const cBin = this.add.text(0, -cardH / 2 + 37, cd.binName, {
         fontFamily: "'Chakra Petch', monospace",
-        fontSize: '12px',
+        fontSize: '12.5px',
         fontStyle: 'bold',
         color: '#FEF08A'
       }).setOrigin(0.5);
@@ -610,50 +610,50 @@ export class MenuScene extends Phaser.Scene {
       // Characteristic
       const l1 = this.add.text(-cardW / 2 + 14, -cardH / 2 + 64, 'CIRI UTAMA:', {
         fontFamily: "'Chakra Petch', sans-serif",
-        fontSize: '11.5px',
+        fontSize: '12px',
         fontStyle: 'bold',
         color: cd.hex
       });
 
       const t1 = this.add.text(-cardW / 2 + 14, -cardH / 2 + 82, cd.trait, {
         fontFamily: "'Plus Jakarta Sans', sans-serif",
-        fontSize: '13px',
+        fontSize: '13.5px',
         color: '#E2E8F0',
         wordWrap: { width: cardW - 28 },
-        lineSpacing: 3
+        lineSpacing: 2
       });
 
       // Examples
       const l2 = this.add.text(-cardW / 2 + 14, -cardH / 2 + 154, 'CONTOH SAMPAH:', {
         fontFamily: "'Chakra Petch', sans-serif",
-        fontSize: '11.5px',
+        fontSize: '12px',
         fontStyle: 'bold',
         color: cd.hex
       });
 
       const t2 = this.add.text(-cardW / 2 + 14, -cardH / 2 + 172, cd.examples, {
         fontFamily: "'Plus Jakarta Sans', sans-serif",
-        fontSize: '13px',
+        fontSize: '13.5px',
         color: '#F8FAFC',
         wordWrap: { width: cardW - 28 },
-        lineSpacing: 3
+        lineSpacing: 2
       });
 
       // Destination
       const l3 = this.add.text(-cardW / 2 + 14, -cardH / 2 + 264, 'ALUR PENGOLAHAN 3R:', {
         fontFamily: "'Chakra Petch', sans-serif",
-        fontSize: '11.5px',
+        fontSize: '12px',
         fontStyle: 'bold',
         color: cd.hex
       });
 
       const t3 = this.add.text(-cardW / 2 + 14, -cardH / 2 + 282, cd.destination, {
         fontFamily: "'Plus Jakarta Sans', sans-serif",
-        fontSize: '13px',
+        fontSize: '13.5px',
         fontStyle: 'italic',
         color: '#CBD5E1',
         wordWrap: { width: cardW - 28 },
-        lineSpacing: 3
+        lineSpacing: 2
       });
 
       card.add([cbg, cTitle, cBin, l1, t1, l2, t2, l3, t3]);
@@ -770,9 +770,9 @@ export class MenuScene extends Phaser.Scene {
     });
     modal.add(backdrop);
 
-    // Main Modal Frame (1040 x 580 - Spacious & Professional)
+    // Main Modal Frame (1040 x 610 - Spacious & Professional)
     const mW = 1040;
-    const mH = 580;
+    const mH = 610;
     const mX = w / 2;
     const mY = h / 2;
 
@@ -833,7 +833,7 @@ export class MenuScene extends Phaser.Scene {
 
     // Left Box: Developer Profile
     const panW = 480;
-    const panH = 380;
+    const panH = 415;
     const panY = mY - mH / 2 + 285;
 
     const leftContainer = this.add.container(mX - 250, panY);
@@ -853,7 +853,7 @@ export class MenuScene extends Phaser.Scene {
       color: '#FFFFFF'
     }).setOrigin(0.5);
 
-    const lDesc = this.add.text(-panW / 2 + 22, -panH / 2 + 66,
+    const lDesc = this.add.text(-panW / 2 + 22, -panH / 2 + 58,
       '• NAMA PENGEMBANG:\n' +
       '  Riskhi Ilham Hidayat\n\n' +
       '• JABATAN:\n' +
@@ -868,9 +868,9 @@ export class MenuScene extends Phaser.Scene {
       '  Menciptakan media pembelajaran berbasis gamifikasi yang interaktif\n' +
       '  untuk menumbuhkan kepedulian lingkungan dan kebiasaan pilah sampah.', {
       fontFamily: "'Plus Jakarta Sans', sans-serif",
-      fontSize: '12.5px',
+      fontSize: '13.5px',
       color: '#E2E8F0',
-      lineSpacing: 4
+      lineSpacing: 3
     });
 
     leftContainer.add([lbg, lTitle, lDesc]);
@@ -893,7 +893,7 @@ export class MenuScene extends Phaser.Scene {
       color: '#FFFFFF'
     }).setOrigin(0.5);
 
-    const rDesc = this.add.text(-panW / 2 + 22, -panH / 2 + 66,
+    const rDesc = this.add.text(-panW / 2 + 22, -panH / 2 + 58,
       '• GAME ENGINE & RUNTIME:\n' +
       '  Phaser 3.80+ (HTML5 Canvas & WebGL High Performance)\n\n' +
       '• PENGEMBANGAN KODE:\n' +
@@ -906,15 +906,15 @@ export class MenuScene extends Phaser.Scene {
       '• EDISI & VERSI:\n' +
       '  Versi 1.2 (Edisi Pembelajaran Interaktif)', {
       fontFamily: "'Plus Jakarta Sans', sans-serif",
-      fontSize: '12.5px',
+      fontSize: '13.5px',
       color: '#E2E8F0',
-      lineSpacing: 4
+      lineSpacing: 3
     });
 
     rightContainer.add([rbg, rTitle, rDesc]);
 
     // Bottom Ecological Quote Plate
-    const quoteY = mY + mH / 2 - 40;
+    const quoteY = mY + mH / 2 - 34;
     const qbg = this.add.graphics();
     qbg.fillStyle(0x0f172a, 0.95);
     qbg.fillRoundedRect(mX - 480, quoteY - 22, 960, 44, 6);

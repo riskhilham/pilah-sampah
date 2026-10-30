@@ -463,11 +463,11 @@ export class ShiftSelectScene extends Phaser.Scene {
 
     const desc = this.add.text(cardX, cardY - cardH / 2 + 126, levelData.description, {
       fontFamily: "'Plus Jakarta Sans', sans-serif",
-      fontSize: '13.5px',
+      fontSize: '15px',
       color: '#E2E8F0',
-      lineSpacing: 4,
+      lineSpacing: 5,
       align: 'center',
-      wordWrap: { width: cardW - 80 }
+      wordWrap: { width: cardW - 70 }
     }).setOrigin(0.5);
 
     // Targets Grid Matrix (4 Clean Visual Stat Pills)
@@ -479,8 +479,8 @@ export class ShiftSelectScene extends Phaser.Scene {
       { label: 'TOLERANSI B3', val: `Maks ${levelData.allowedHazardMisses}x`, col: '#F87171' }
     ];
 
-    const statBoxW = 126;
-    const statBoxH = 46;
+    const statBoxW = 128;
+    const statBoxH = 48;
     const statStartX = cardX - (statCols.length * statBoxW + (statCols.length - 1) * 8) / 2 + statBoxW / 2;
 
     statCols.forEach((st, sidx) => {
@@ -492,16 +492,16 @@ export class ShiftSelectScene extends Phaser.Scene {
       sbg.strokeRoundedRect(sx - statBoxW / 2, targetY - statBoxH / 2, statBoxW, statBoxH, 6);
       modal.add(sbg);
 
-      const slbl = this.add.text(sx, targetY - 11, st.label, {
+      const slbl = this.add.text(sx, targetY - 12, st.label, {
         fontFamily: "'Chakra Petch', sans-serif",
-        fontSize: '10px',
+        fontSize: '11px',
         fontStyle: 'bold',
         color: '#94A3B8'
       }).setOrigin(0.5);
 
-      const sval = this.add.text(sx, targetY + 9, st.val, {
+      const sval = this.add.text(sx, targetY + 10, st.val, {
         fontFamily: "'Fredoka', sans-serif",
-        fontSize: '14px',
+        fontSize: '15.5px',
         fontStyle: 'bold',
         color: st.col
       }).setOrigin(0.5);
@@ -515,31 +515,32 @@ export class ShiftSelectScene extends Phaser.Scene {
     modal.add(streamContainer);
 
     const streamBadges = nodeData.streams || ['ORGANIK', 'DAUR ULANG'];
-    let curX = -((streamBadges.length * 105) / 2) + 52;
+    let curX = -((streamBadges.length * 108) / 2) + 54;
     streamBadges.forEach(str => {
       const badgeG = this.add.graphics();
       badgeG.fillStyle(0x131f2e, 0.9);
-      badgeG.fillRoundedRect(curX - 48, -11, 96, 22, 4);
+      badgeG.fillRoundedRect(curX - 50, -12, 100, 24, 4);
       badgeG.lineStyle(1, nodeData.highlightColor, 0.6);
-      badgeG.strokeRoundedRect(curX - 48, -11, 96, 22, 4);
+      badgeG.strokeRoundedRect(curX - 50, -12, 100, 24, 4);
 
       const badgeT = this.add.text(curX, 0, str, {
         fontFamily: "'Chakra Petch', monospace",
-        fontSize: '10px',
+        fontSize: '11px',
         fontStyle: 'bold',
         color: '#FFFFFF'
       }).setOrigin(0.5);
 
       streamContainer.add([badgeG, badgeT]);
-      curX += 105;
+      curX += 108;
     });
 
     // Personal Records
     const recY = cardY + 112;
     const starsStr = '★'.repeat(progress.stars) + '☆'.repeat(3 - progress.stars);
-    const recTxt = this.add.text(cardX, recY, `BINTANG DIRAIH: ${starsStr}   •   SKOR TERTINGGI: ${progress.highScore}`, {
+    const highestScore = (progress.score !== undefined ? progress.score : (progress.highScore || 0));
+    const recTxt = this.add.text(cardX, recY, `BINTANG DIRAIH: ${starsStr}   •   SKOR TERTINGGI: ${highestScore}`, {
       fontFamily: "'Chakra Petch', sans-serif",
-      fontSize: '12.5px',
+      fontSize: '14px',
       fontStyle: 'bold',
       color: '#FBBF24'
     }).setOrigin(0.5);
@@ -549,19 +550,19 @@ export class ShiftSelectScene extends Phaser.Scene {
     const launchBtn = this.add.container(cardX, btnY);
     const lbg = this.add.graphics();
     lbg.fillStyle(nodeData.color, 1);
-    lbg.fillRoundedRect(-180, -22, 360, 44, 8);
+    lbg.fillRoundedRect(-190, -23, 380, 46, 8);
     lbg.lineStyle(2, 0xffffff, 0.7);
-    lbg.strokeRoundedRect(-180, -22, 360, 44, 8);
+    lbg.strokeRoundedRect(-190, -23, 380, 46, 8);
 
     const ltxt = this.add.text(0, 0, `MULAI MAIN LEVEL ${nodeData.level} SEKARANG ▶`, {
       fontFamily: "'Fredoka', sans-serif",
-      fontSize: '16px',
+      fontSize: '17px',
       fontStyle: 'bold',
       color: '#FFFFFF'
     }).setOrigin(0.5);
 
     launchBtn.add([lbg, ltxt]);
-    const launchHit = this.add.rectangle(0, 0, 360, 44, 0x000000, 0.001);
+    const launchHit = this.add.rectangle(0, 0, 380, 46, 0x000000, 0.001);
     launchHit.setInteractive({ useHandCursor: true });
     launchBtn.add(launchHit);
 

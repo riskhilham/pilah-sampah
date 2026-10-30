@@ -293,7 +293,7 @@ export class CatalogScene extends Phaser.Scene {
 
     const catBadgeText = this.add.text(71, 23, `${catName}`, {
       fontFamily: "'Chakra Petch', sans-serif",
-      fontSize: '11px',
+      fontSize: '11.5px',
       fontStyle: 'bold',
       color: catHex
     }).setOrigin(0.5);
@@ -302,7 +302,7 @@ export class CatalogScene extends Phaser.Scene {
     const locTag = item.locationTag || 'SEKOLAH';
     const locText = this.add.text(cardW - 14, 23, `[ ${locTag} ]`, {
       fontFamily: "'Chakra Petch', monospace",
-      fontSize: '10.5px',
+      fontSize: '11px',
       fontStyle: 'bold',
       color: '#38BDF8'
     }).setOrigin(1, 0.5);
@@ -328,19 +328,22 @@ export class CatalogScene extends Phaser.Scene {
     // Decomposition time
     const decompText = this.add.text(96, 68, `Waktu Urai: ${item.decomposeTime}`, {
       fontFamily: "'Chakra Petch', monospace",
-      fontSize: '11px',
+      fontSize: '11.5px',
       fontStyle: 'bold',
-      color: '#FBBF24'
+      color: '#FBBF24',
+      wordWrap: { width: 238 }
     });
 
     // Snippet of fact (cleanly truncated)
     const rawFact = item.fact || '';
     const factSnippet = rawFact.length > 70 ? rawFact.substring(0, 68) + '...' : rawFact;
-    const factText = this.add.text(96, 88, factSnippet, {
+    const factY = Math.max(88, decompText.y + decompText.height + 4);
+    const factText = this.add.text(96, factY, factSnippet, {
       fontFamily: "'Plus Jakarta Sans', sans-serif",
-      fontSize: '11px',
+      fontSize: '11.5px',
       color: '#94A3B8',
-      wordWrap: { width: 240 }
+      wordWrap: { width: 238 },
+      lineSpacing: 2
     });
 
     // 4. Bottom Interactive Cue Button Bar
@@ -352,7 +355,7 @@ export class CatalogScene extends Phaser.Scene {
 
     const actionText = this.add.text(cardW / 2, 183, `KLIK UNTUK INSPEKSI DETAIL ▶`, {
       fontFamily: "'Chakra Petch', sans-serif",
-      fontSize: '11px',
+      fontSize: '11.5px',
       fontStyle: 'bold',
       color: '#38BDF8',
       letterSpacing: 0.5
@@ -686,7 +689,7 @@ export class CatalogScene extends Phaser.Scene {
     const tabFactsBg = this.add.graphics();
     const tabFactsTxt = this.add.text(0, 0, '🔬 FAKTA & BAHAYA LINGKUNGAN', {
       fontFamily: "'Chakra Petch', sans-serif",
-      fontSize: '12px',
+      fontSize: '13px',
       fontStyle: 'bold',
       color: '#FFFFFF'
     }).setOrigin(0.5);
@@ -697,7 +700,7 @@ export class CatalogScene extends Phaser.Scene {
     const tabActionBg = this.add.graphics();
     const tabActionTxt = this.add.text(0, 0, '🌱 AKSI NYATA LINGKUNGAN (3R)', {
       fontFamily: "'Chakra Petch', sans-serif",
-      fontSize: '12px',
+      fontSize: '13px',
       fontStyle: 'bold',
       color: '#FFFFFF'
     }).setOrigin(0.5);
@@ -737,16 +740,16 @@ export class CatalogScene extends Phaser.Scene {
 
         const t1 = this.add.text(16, 14, 'DAMPAK EKOLOGIS & KARAKTERISTIK BAHAN', {
           fontFamily: "'Chakra Petch', sans-serif",
-          fontSize: '13px',
+          fontSize: '13.5px',
           fontStyle: 'bold',
           color: '#38BDF8'
         });
 
         const b1 = this.add.text(16, 42, item.fact, {
           fontFamily: "'Plus Jakarta Sans', sans-serif",
-          fontSize: '13px',
+          fontSize: '13.5px',
           color: '#ECEFF1',
-          lineSpacing: 5,
+          lineSpacing: 4,
           wordWrap: { width: 518 }
         });
 
@@ -759,16 +762,16 @@ export class CatalogScene extends Phaser.Scene {
 
         const t2 = this.add.text(16, 186, 'RISIKO JIKA SALAH DIBUANG ATAU DICAMPUR', {
           fontFamily: "'Chakra Petch', sans-serif",
-          fontSize: '13px',
+          fontSize: '13.5px',
           fontStyle: 'bold',
           color: '#F87171'
         });
 
         const b2 = this.add.text(16, 214, item.funFact || 'Memilah sampah dari awal mencegah pencemaran tanah dan sumber air minum.', {
           fontFamily: "'Plus Jakarta Sans', sans-serif",
-          fontSize: '12.5px',
+          fontSize: '13px',
           color: '#FECDD3',
-          lineSpacing: 5,
+          lineSpacing: 4,
           wordWrap: { width: 518 }
         });
 
@@ -795,16 +798,16 @@ export class CatalogScene extends Phaser.Scene {
 
         const t1 = this.add.text(16, 14, 'AKSI NYATA LINGKUNGAN HIDUP (3R)', {
           fontFamily: "'Chakra Petch', sans-serif",
-          fontSize: '13px',
+          fontSize: '13.5px',
           fontStyle: 'bold',
           color: '#4ADE80'
         });
 
         const b1 = this.add.text(16, 42, item.ecoAction || 'Pilah sampah langsung di kelas dan manfaatkan bank sampah sekolah untuk daur ulang.', {
           fontFamily: "'Plus Jakarta Sans', sans-serif",
-          fontSize: '13px',
+          fontSize: '13.5px',
           color: '#E2E8F0',
-          lineSpacing: 5,
+          lineSpacing: 4,
           wordWrap: { width: 518 }
         });
 
@@ -817,16 +820,16 @@ export class CatalogScene extends Phaser.Scene {
 
         const t2 = this.add.text(16, 186, 'PERAN DALAM PELESTARIAN LINGKUNGAN HIDUP (3R)', {
           fontFamily: "'Chakra Petch', sans-serif",
-          fontSize: '13px',
+          fontSize: '13.5px',
           fontStyle: 'bold',
           color: '#38BDF8'
         });
 
         const b2 = this.add.text(16, 214, 'Jadilah Duta Kebersihan! Edukasi teman-teman untuk memisahkan sampah organik sisa makanan ke komposter, dan sampah daur ulang ke Bank Sampah.', {
           fontFamily: "'Plus Jakarta Sans', sans-serif",
-          fontSize: '12.5px',
-          color: '#CBD5E1',
-          lineSpacing: 5,
+          fontSize: '13px',
+          color: '#E0F2FE',
+          lineSpacing: 4,
           wordWrap: { width: 518 }
         });
 
