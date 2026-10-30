@@ -49,7 +49,7 @@ const config = {
     pixelArt: false,
     antialias: true,
     antialiasGL: true,
-    roundPixels: true,
+    roundPixels: false,
     powerPreference: 'high-performance'
   },
   scene: [
